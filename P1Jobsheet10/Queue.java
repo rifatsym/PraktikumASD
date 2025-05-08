@@ -1,3 +1,4 @@
+package P1Jobsheet10;
 import java.util.Scanner;
 
 public class Queue {
@@ -64,7 +65,8 @@ public class Queue {
 
     public void Enqueue(int dt){
         if (isFull()) {
-            System.out.println("Queue sudah penuh");            
+            System.out.println("Queue sudah penuh");
+            System.exit(1);            
         } else{
             if (isEmpty()) {
                 front = rear = 0;                
@@ -83,7 +85,8 @@ public class Queue {
     public int Dequeue(){
         int dt = 0;
         if (isEmpty()) {
-            System.out.println("Queue masih kosong");            
+            System.out.println("Queue masih kosong"); 
+            System.exit(1);           
         } else{
             dt = data[front];
             size--;
