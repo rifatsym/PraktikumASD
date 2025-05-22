@@ -31,6 +31,13 @@ public class DLLMain11 {
             System.out.println("5. Tampilkan data");
             System.out.println("6. Cari mahasiswa berdasarkan NIM");
             System.out.println("7. Insert After");
+            System.out.println("8. Add");
+            System.out.println("9. Remove After");
+            System.out.println("10. Remove");
+            System.out.println("11. Get First");
+            System.out.println("12. Get Last");
+            System.out.println("13. Get Index");
+            System.out.println("14. Size");
             System.out.println("0. Keluar");
             System.out.print("Pilih menu: ");
             pilihan = scan.nextInt();
@@ -65,6 +72,40 @@ public class DLLMain11 {
                     Mahasiswa11 mhs = inpMahasiswa11(scan);
                     list11.insertAfter(keyNim, mhs);
                 }
+            case 8 -> {
+                    System.out.print("Masukkan indeks tempat data disisipkan: ");
+                    int indexAdd = scan.nextInt();
+                    scan.nextLine(); 
+                    Mahasiswa11 mhsAdd = inpMahasiswa11(scan);
+                    list11.add(indexAdd, mhsAdd);
+                    break;
+                }
+            case 9 -> {
+                    System.out.print("Masukkan NIM sebelum node yang akan dihapus: ");
+                    String keyNimRemove = scan.nextLine();
+                    list11.removeAfter(keyNimRemove);
+                    break;
+            }
+            case 10 -> {
+                    System.out.print("Masukkan indeks node yang akan dihapus: ");
+                    int indexRemove = scan.nextInt();
+                    scan.nextLine();
+                    list11.remove(indexRemove);
+                    break;
+            }
+            case 11 -> list11.getFirst();
+            case 12 -> list11.getLast();
+            case 13 -> {
+                System.out.print("Masukkan indeks yang ingin ditampilkan: ");
+                int idx = scan.nextInt();
+                scan.nextLine();
+                list11.get(idx);
+                break;
+            }
+            case 14 -> {
+                System.out.println("Jumlah data dalam list: " + list11.size());
+                    break;
+            }       
             case 0 -> System.out.println("Keluar dari program.");
             default -> System.out.println("Pilihan tidak valid!");
         }

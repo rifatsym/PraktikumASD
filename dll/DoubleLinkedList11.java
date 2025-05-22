@@ -1,10 +1,10 @@
 package dll;
 
-import java.security.Key;
 
 public class DoubleLinkedList11 {
     Node11 head;
     Node11 tail;
+    int size;
 
     public DoubleLinkedList11(){
         head = null;
@@ -104,5 +104,96 @@ public class DoubleLinkedList11 {
             tail = tail.prev;
             tail.next = null;
         }
+    }
+
+    public void add(int index, Mahasiswa11 data) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index di luar batas");
+        }
+        if (index == 0) {
+            addFirst(data);
+        } else if (index == size) {
+            addLast(data);
+        } else {
+            Node11 current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            Node11 newNode = new Node11(data);
+            current.prev.next = newNode;
+            current.prev = newNode;
+            size++;
+        }
+    }
+
+    public void removeAfter(String keyNIM) {
+        Node11 current = head;
+        while (current != null && !current.data.nim.equals(keyNIM)) {
+            current = current.next;
+        }
+        if (current != null && current.next != null) {
+            Node11 nodeToRemove = current.next;
+            current.next = nodeToRemove.next;
+            if (nodeToRemove.next != null) {
+                nodeToRemove.next.prev = current;
+            } else {
+                tail = current;
+            }
+            size--;
+        }
+    }
+
+    public void remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index di luar batas");
+        }
+        if (index == 0) {
+            removeFirst();
+        } else if (index == size - 1) {
+            removeLast();
+        } else {
+            Node11 current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            current.prev.next = current.next;
+            current.next.prev = current.prev;
+            size--;
+        }
+    }
+
+    public Mahasiswa11 getFirst() {
+        if (!isEmpty()) {
+            return head.data;
+        }
+        return null;
+    }
+
+    public Mahasiswa11 getLast() {
+        if (!isEmpty()) {
+            return tail.data;
+        }
+        return null;
+    }
+
+    public Mahasiswa11 get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index di luar batas");
+        }
+        Node11 current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current.data;
+    }
+
+    public int size() {
+        int count = 0;
+        Node11 current = head;
+            while (current != null) {
+                count++;
+                current = current.next;
+            }
+            return count;
     }
 }
