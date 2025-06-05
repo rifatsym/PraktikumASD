@@ -10,6 +10,54 @@ public class BinaryTree11 {
         return root == null;
     }
 
+    public Node11 addRekursif(Node11 current, Mahasiswa11 data){
+        if (current == null) {
+            return new Node11(data);
+        }
+        if (data.ipk < current.mahasiswa.ipk) {
+            current.left = addRekursif(current.left, data);
+        } else {
+            current.right = addRekursif(current.right, data);
+        }
+        return current;
+    }
+
+    public void addRekursif(Mahasiswa11 data) {
+        root = addRekursif(root, data);
+    }
+
+    public Mahasiswa11 cariMinIPK() {
+        if (isEmpty()) return null;
+        Node11 current = root;
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current.mahasiswa;
+    }
+
+    public Mahasiswa11 cariMaxIPK() {
+        if (isEmpty()) return null;
+        Node11 current = root;
+        while (current.right != null) {
+            current = current.right;
+        }
+        return current.mahasiswa;
+    }
+
+    public void tampilMahasiswaIPKdiAtas(Node11 node, double ipkBatas) {
+        if (node != null) {
+            if (node.mahasiswa.ipk > ipkBatas) {
+                node.mahasiswa.tampilInformasi();
+            }
+            tampilMahasiswaIPKdiAtas(node.left, ipkBatas);
+            tampilMahasiswaIPKdiAtas(node.right, ipkBatas);
+        }
+    }
+
+    public void tampilMahasiswaIPKdiAtas(double ipkBatas) {
+        tampilMahasiswaIPKdiAtas(root, ipkBatas);
+    }
+
     public void add(Mahasiswa11 mahasiswa) {
         Node11 newNode = new Node11(mahasiswa);
         if (isEmpty()) {
